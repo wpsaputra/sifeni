@@ -128,18 +128,43 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionUpload()
-    {
-        $model = new UploadForm();
+    // public function actionUpload()
+    // {
+    //     $model = new UploadForm();
 
-        if (Yii::$app->request->isPost) {
-            $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
-            if ($model->upload()) {
-                // file is uploaded successfully
-                return;
+    //     if (Yii::$app->request->isPost) {
+    //         $model->imageFiles = UploadedFile::getInstances($model, 'imageFiles');
+    //         if ($model->upload()) {
+    //             // file is uploaded successfully
+    //             return;
+    //         }
+    //     }
+
+    //     return $this->render('upload', ['model' => $model]);
+    // }
+
+    public function actionUpload()  
+    {
+        $this->enableCsrfValidation = false;
+        $fileName = 'file';
+        // $uploadPath = './files';
+        $uploadPath = './uploads';
+        // $uploadPath = 'uploads';
+    
+        if (isset($_FILES[$fileName])) {
+            $file = \yii\web\UploadedFile::getInstanceByName($fileName);
+    
+            //Print file data
+            //print_r($file);
+    
+            if ($file->saveAs($uploadPath . '/' . $file->name)) {
+            // if ($file->saveAs($file->name)) {
+                //Now save file data to database
+    
+                echo \yii\helpers\Json::encode($file);
             }
         }
-
-        return $this->render('upload', ['model' => $model]);
+    
+        return false;
     }
 }
