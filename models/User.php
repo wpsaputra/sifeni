@@ -32,6 +32,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             [['username', 'password', 'level'], 'required'],
             [['level'], 'integer'],
             [['username', 'password'], 'string', 'max' => 120],
+            [['username'], 'unique'],
         ];
     }
 

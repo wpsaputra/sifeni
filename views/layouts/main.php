@@ -11,6 +11,8 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
 AppAsset::register($this);
+Yii::$app->view->title = 'SiFeni'; 
+// Yii::$app->view->title = Yii::$app->user->identity->level; 
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -29,8 +31,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        // 'brandLabel' => Yii::$app->name,
-        'brandLabel' => 'SiFENI',
+        'brandLabel' => Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -40,6 +41,7 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
+            ['label' => 'Data Pengguna', 'url' => ['/user']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
