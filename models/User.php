@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -12,11 +11,13 @@ use Yii;
  * @property string $password
  * @property integer $level
  */
-class User extends \yii\db\ActiveRecord
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
     /**
      * @inheritdoc
      */
+    public $authKey = 'dsfdfmjvhsdfgn215544';
+
     public static function tableName()
     {
         return 'sf_user';
@@ -47,5 +48,45 @@ class User extends \yii\db\ActiveRecord
         ];
     }
 
-    
+
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        return static::findOne(['access_token' => $token]);
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function getAuthKey()
+    {
+        return $this->authKey;
+    }
+
+    public function validateAuthKey($authKey)
+    {
+        return $this->authKey === $authKey;
+    }
+
+    public static function findByUsername($username)
+    {
+        //mencari user login berdasarkan username dan hanya dicari 1.
+        $user = static::find()->where(['username'=>$username])->one(); 
+        if(count($user)){
+            return new static($user);
+        }
+        return null;
+    }
+
+    public function validatePassword($password) {
+        return $this->password ===  ($password);
+    }
+
+
 }
