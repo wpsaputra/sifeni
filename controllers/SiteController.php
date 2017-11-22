@@ -125,7 +125,20 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        // return $this->render('about');
+
+        $model = new UploadForm();
+        
+                if (Yii::$app->request->isPost) {
+                    $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+                    if ($model->upload()) {
+                        // file is uploaded successfully
+                        return;
+                    }
+                }
+        
+                return $this->render('about', ['model' => $model]);
+        
     }
 
     // public function actionUpload()
@@ -143,28 +156,46 @@ class SiteController extends Controller
     //     return $this->render('upload', ['model' => $model]);
     // }
 
-    public function actionUpload()  
+    // public function actionUpload()  
+    // {
+    //     $ds          = DIRECTORY_SEPARATOR;  //1
+         
+    //     $storeFolder = 'uploads';   //2
+         
+    //     if (!empty($_FILES)) {
+             
+    //         $tempFile = $_FILES['file']['tmp_name'];          //3             
+              
+    //         // $targetPath = '..'.$ds.dirname( __FILE__ ) . $ds. $storeFolder . $ds;  //4
+    //         $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;  //4
+             
+    //         $targetFile =  $targetPath. $_FILES['file']['name'];  //5
+         
+    //         move_uploaded_file($tempFile,$targetFile); //6
+             
+    //     }
+        
+    // }
+
+    public function actionUpload()
     {
-        $this->enableCsrfValidation = false;
-        $fileName = 'file';
-        // $uploadPath = './files';
-        $uploadPath = './uploads';
-        // $uploadPath = 'uploads';
-    
-        if (isset($_FILES[$fileName])) {
-            $file = \yii\web\UploadedFile::getInstanceByName($fileName);
-    
-            //Print file data
-            //print_r($file);
-    
-            if ($file->saveAs($uploadPath . '/' . $file->name)) {
-            // if ($file->saveAs($file->name)) {
-                //Now save file data to database
-    
-                echo \yii\helpers\Json::encode($file);
+        $model = new UploadForm();
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            if ($model->upload()) {
+                // file is uploaded successfully
+                return;
             }
         }
-    
-        return false;
+
+        return $this->render('upload', ['model' => $model]);
     }
+
+    public function beforeAction($action) { $this->enableCsrfValidation = false; return parent::beforeAction($action); }
+    
+
+
+
+    
 }
