@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "sf_fenomena".
@@ -33,6 +35,54 @@ class Fenomena extends \yii\db\ActiveRecord
         return 'sf_fenomena';
     }
 
+    public function behaviors() {
+        
+        return [
+                
+            "tanggalFenomenaBeforeSave" => [
+                "class" => TimestampBehavior::className(),
+                    "attributes" => [
+                        ActiveRecord::EVENT_BEFORE_INSERT => "tanggal_fenomena",
+                        ActiveRecord::EVENT_BEFORE_UPDATE => "tanggal_fenomena",
+                    ],
+                    "value" => function() { return Yii::$app->formatter->asDate($this->tanggal_fenomena, "Y-MM-dd"); }
+                        
+            ],
+                
+            "tanggalFenomenaAfterFind" => [
+                   "class" => TimestampBehavior::className(),
+                    "attributes" => [
+                        ActiveRecord::EVENT_AFTER_FIND => "tanggal_fenomena",
+                    ],
+                    // "value" => function() { return Yii::$app->formatter->asDate($this->tanggal_fenomena, "M/dd/Y"); }
+                    "value" => function() { return Yii::$app->formatter->asDate($this->tanggal_fenomena, "MMM dd, Y"); }
+                        
+            ],
+
+            "tanggalEntriBeforeSave" => [
+                "class" => TimestampBehavior::className(),
+                    "attributes" => [
+                        ActiveRecord::EVENT_BEFORE_INSERT => "tanggal_entri",
+                        ActiveRecord::EVENT_BEFORE_UPDATE => "tanggal_entri",
+                    ],
+                    "value" => function() { return Yii::$app->formatter->asDate($this->tanggal_entri, "Y-MM-dd"); }
+                        
+                ],
+                
+            "tanggalEntriAfterFind" => [
+                   "class" => TimestampBehavior::className(),
+                    "attributes" => [
+                        ActiveRecord::EVENT_AFTER_FIND => "tanggal_entri",
+                    ],
+                    // "value" => function() { return Yii::$app->formatter->asDate($this->tanggal_fenomena, "M/dd/Y"); }
+                    "value" => function() { return Yii::$app->formatter->asDate($this->tanggal_entri, "MMM dd, Y"); }
+                        
+            ]
+                
+        ];
+        
+    }
+
     /**
      * @inheritdoc
      */
@@ -58,14 +108,14 @@ class Fenomena extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'tanggal_fenomena' => 'Tanggal Fenomena',
-            'sumber_id' => 'Sumber ID',
-            'kecamatan_id' => 'Kecamatan ID',
+            'sumber_id' => 'Sumber',
+            'kecamatan_id' => 'Tempat',
             'isi_fenomena' => 'Isi Fenomena',
             'lapangan_usaha' => 'Lapangan Usaha',
-            'pengaruh_id' => 'Pengaruh ID',
+            'pengaruh_id' => 'Pengaruh',
             'tanggal_entri' => 'Tanggal Entri',
-            'upload_foto_dokumen' => 'Upload Foto Dokumen',
-            'isVerified' => 'Is Verified',
+            'upload_foto_dokumen' => 'Upload Foto / Dokumen',
+            'isVerified' => 'Verifikasi',
         ];
     }
 

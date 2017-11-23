@@ -20,7 +20,7 @@ use app\models\SfPengaruh;
     <!-- <?= $form->field($model, 'tanggal_fenomena')->textInput() ?> -->
     <?= $form->field($model, 'tanggal_fenomena')->widget(\yii\jui\DatePicker::classname(), [
         //'language' => 'ru',
-        'dateFormat' => 'yyyy-MM-dd',
+        // 'dateFormat' => 'yyyy-MM-dd',
         'options' => ['class' => 'form-control']
     ]) ?>
 
@@ -59,7 +59,7 @@ use app\models\SfPengaruh;
     <!-- <?= $form->field($model, 'tanggal_entri')->textInput() ?> -->
     <?= $form->field($model, 'tanggal_entri')->widget(\yii\jui\DatePicker::classname(), [
         //'language' => 'ru',
-        'dateFormat' => 'yyyy-MM-dd',
+        // 'dateFormat' => 'yyyy-MM-dd',
         'options' => ['class' => 'form-control']
     ]) ?>
 
