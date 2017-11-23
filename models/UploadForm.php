@@ -43,8 +43,12 @@ class UploadForm extends Model
         public function upload()
         {
             if ($this->validate()) {
-                $this->imageFile->saveAs('uploads/' . $this->imageFile->baseName . '.' . $this->imageFile->extension);
-                return true;
+                $date = new \DateTime();
+                $date = $date->getTimestamp();
+
+                $this->imageFile->saveAs('uploads/' . $date .  $this->imageFile->baseName . '.' . $this->imageFile->extension);
+                return $date .  $this->imageFile->baseName . '.' . $this->imageFile->extension;
+                // return true;
             } else {
                 return false;
             }

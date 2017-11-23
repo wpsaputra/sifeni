@@ -129,15 +129,26 @@ class SiteController extends Controller
 
         $model = new UploadForm();
         
-                if (Yii::$app->request->isPost) {
-                    $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-                    if ($model->upload()) {
-                        // file is uploaded successfully
-                        return;
-                    }
-                }
+        //         if (Yii::$app->request->isPost) {
+        //             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+        //             if ($model->upload()) {
+        //                 // file is uploaded successfully
+        //                 return;
+        //             }
+        //         }
+
+        if (Yii::$app->request->isPost) {
+            $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+            $md = $model->upload();
+            if ($md) {
+                // file is uploaded successfully
+                return $md;
+                // echo ($md);
+                // $this->redirect('about', ['model' => $model]);
+            }
+        }
         
-                return $this->render('about', ['model' => $model]);
+        return $this->render('about', ['model' => $model]);
         
     }
 
@@ -183,19 +194,34 @@ class SiteController extends Controller
 
         if (Yii::$app->request->isPost) {
             $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
-            if ($model->upload()) {
+            $md = $model->upload();
+            if ($md) {
                 // file is uploaded successfully
-                return;
+                return $md;
+                // print_r($md);
             }
         }
 
         return $this->render('upload', ['model' => $model]);
     }
 
+    public function actionDelete()
+    {
+        $ds = DIRECTORY_SEPARATOR;  // Store directory separator (DIRECTORY_SEPARATOR) to a simple variable. This is just a personal preference as we hate to type long variable name.
+        $storeFolder = 'uploads'; 
+        
+        $fileList = $_POST['fileList'];
+        // $targetPath = dirname( __FILE__ ) . $ds. $storeFolder . $ds;
+        $targetPath = $storeFolder . $ds;
+        
+        
+        if(isset($fileList)){
+            unlink($targetPath.$fileList);
+        }
+    }
+
+
     public function beforeAction($action) { $this->enableCsrfValidation = false; return parent::beforeAction($action); }
     
-
-
-
     
 }

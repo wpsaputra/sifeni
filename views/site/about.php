@@ -31,21 +31,65 @@ $this->registerCssFile('@web/css/dropzone.css' , ['position' => 1]);
 // );
 ?>
 <script>
+    // https://stackoverflow.com/questions/24859005/dropzone-js-how-to-change-file-name-before-uploading-to-folder
+    var fileList = new Array;
+    var i = 0;
     Dropzone.options.myAwesomeDropzone = {
         paramName: "UploadForm[imageFile]", // The name that will be used to transfer the file
         maxFilesize: 1, // MB
         addRemoveLinks: true,
-        removedfile: function(file) {
-            var name = file.name;        
-            // $.ajax({
-            //     type: 'POST',
-            //     url: 'delete.php',
-            //     data: "id="+name,
-            //     dataType: 'html'
-            // });
-            var _ref;
-            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;        
-        }
+        // removedfile: function(file) {
+        //     var name = file.name;        
+        //     // $.ajax({
+        //     //     type: 'POST',
+        //     //     url: 'delete.php',
+        //     //     data: "id="+name,
+        //     //     dataType: 'html'
+        //     // });
+        //     var _ref;
+        //     return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;        
+        // },
+
+        acceptedFiles: "image/jpeg,image/png,application/pdf",
+
+        init: function() {
+
+            // Hack: Add the dropzone class to the element
+            // $(this.element).addClass("dropzone");
+
+            this.on("success", function(file, serverFileName) {
+                fileList[i] = {"serverFileName" : serverFileName, "fileName" : file.name,"fileId" : i };
+                console.log(fileList);
+                i++;
+
+            });
+            this.on("removedfile", function(file) {
+                var rmvFile = "";
+                for(f=0;f<fileList.length;f++){
+
+                    if(fileList[f].fileName == file.name)
+                    {
+                        rmvFile = fileList[f].serverFileName;
+                        fileList.splice(f,1);
+
+                    }
+
+                }
+
+                if (rmvFile){
+                    $.ajax({
+                        // url: "http://localhost/dropzone/sample/delete_temp_files.php",
+                        url: "<?php echo Url::to(['site/delete']);?>",
+                        type: "POST",
+                        data: { "fileList" : rmvFile }
+                    });
+                }
+
+                console.log(fileList);
+            });
+
+
+        },
 
 
 
