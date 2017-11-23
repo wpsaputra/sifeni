@@ -32,6 +32,8 @@ $this->registerCssFile('@web/css/dropzone.css' , ['position' => 1]);
 ?>
 <script>
     // https://stackoverflow.com/questions/24859005/dropzone-js-how-to-change-file-name-before-uploading-to-folder
+    // https://stackoverflow.com/questions/29910240/get-count-of-selected-files-in-dropzone
+
     var fileList = new Array;
     var i = 0;
     Dropzone.options.myAwesomeDropzone = {
@@ -58,8 +60,10 @@ $this->registerCssFile('@web/css/dropzone.css' , ['position' => 1]);
             // $(this.element).addClass("dropzone");
 
             this.on("success", function(file, serverFileName) {
-                fileList[i] = {"serverFileName" : serverFileName, "fileName" : file.name,"fileId" : i };
+                fileList[i] = {"serverFileName" : serverFileName, "fileName" : file.name,"fileId" : i, "uuid" : file.upload.uuid};
                 console.log(fileList);
+                console.log(file);
+                console.log(file.upload.uuid);
                 i++;
 
             });
@@ -67,10 +71,12 @@ $this->registerCssFile('@web/css/dropzone.css' , ['position' => 1]);
                 var rmvFile = "";
                 for(f=0;f<fileList.length;f++){
 
-                    if(fileList[f].fileName == file.name)
+                    if(fileList[f].fileName == file.name && fileList[f].uuid == file.upload.uuid)
+                    // if(fileList[f].uuid == file.upload.uuid)
                     {
                         rmvFile = fileList[f].serverFileName;
                         fileList.splice(f,1);
+                        i=i-1;
 
                     }
 
