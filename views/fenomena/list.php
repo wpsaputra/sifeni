@@ -6,10 +6,34 @@ use app\models\Fenomena;
 $dataProvider = new ActiveDataProvider([
     'query' => Fenomena::find(),
     'pagination' => [
-        'pageSize' => 1,
+        'pageSize' => 4,
     ],
 ]);
-echo ListView::widget([
-    'dataProvider' => $dataProvider,
-    'itemView' => '_post',
-]);
+?>
+
+<div class="post">
+    <div class="row">
+        <?php
+        echo ListView::widget([
+            'dataProvider' => $dataProvider,
+            'summary'=>'', 
+            'itemView' => '_post',
+            'pager' => [
+                // Customzing options for pager container tag
+                'options' => [
+                    'tag' => 'div',
+                    'class' => 'pagination col-md-12',
+                    // 'style' => 'position:absolute;bottom:0;',
+                    'id' => 'pager-container',
+                ],
+                
+            ],
+
+
+
+        ]);
+        ?>
+    </div>
+</div>
+
+
