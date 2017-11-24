@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
+use yii\helpers\Url;
 
 $array_image_dokumen = explode(",", $model->upload_foto_dokumen); //image+dokumen
 $array_image = array(); //image only
@@ -107,9 +108,31 @@ for($i=0; $i<count($array_image_dokumen); $i++){
                         <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Download
                         <span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a href="#">HTML</a></li>
+                            <!-- <li><a href="#">HTML</a></li>
                             <li><a href="#">CSS</a></li>
-                            <li><a href="#">JavaScript</a></li>
+                            <li><a href="#">JavaScript</a></li> -->
+                            <?php
+                                for($i=0; $i<count($array_image_dokumen); $i++){
+                                    $download = '
+                                    <li><a href="?href" download="?download">?text</a></li>
+                                    ';
+
+                                    // $download = '
+                                    // <li>?href</li>
+                                    // ';
+
+                                    $variable = substr($array_image_dokumen[$i], 10);
+                                    $url = Url::to('@web/uploads/'.$array_image_dokumen[$i]);
+                                    
+
+                                    $download = str_replace("?href", $url, $download);
+                                    $download = str_replace("?download", $variable, $download);
+                                    $download = str_replace("?text", $variable, $download);
+                                    // $download = str_replace("?href", Html::a($variable, ['@web/uploads/'.$variable], ['download' => $variable]), $download);
+                                    echo $download;
+    
+                                }
+                            ?>
                         </ul>
                     </div>
 
