@@ -45,7 +45,7 @@ Yii::$app->view->title = 'SiFeni';
             ['label' => 'Lihat Fenomena', 'url' => ['/fenomena']],
             ['label' => 'Entri Fenomena', 'url' => ['/fenomena/create']],
             // ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Foto dan Dokumen', 'url' => ['/site/contact']],
+            ['label' => 'Foto dan Dokumen', 'url' => ['/fenomena/list']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (

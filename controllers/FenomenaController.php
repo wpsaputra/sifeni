@@ -121,4 +121,21 @@ class FenomenaController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+    public function actionList()
+    {
+        // $searchModel = new FenomenaSearch();
+        // $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        // return $this->render('list', [
+        //     'searchModel' => $searchModel,
+        //     'dataProvider' => $dataProvider,
+        // ]);
+
+        return $this->render('list', [
+            
+        ]);
+    }
+
+
 }
