@@ -1,6 +1,19 @@
 <?php
 use yii\helpers\Html;
 use yii\helpers\HtmlPurifier;
+
+$array_image_dokumen = explode(",", $model->upload_foto_dokumen); //image+dokumen
+$array_image = array(); //image only
+
+for($i=0; $i<count($array_image_dokumen); $i++){
+    $value = substr($array_image_dokumen[$i], -4); 
+    if($value===".jpg"||$value===".png"){
+        array_push($array_image, $array_image_dokumen[$i]);
+    }
+
+}
+
+
 ?>
     <!-- <h2><?= Html::encode($model->id) ?></h2>
 
