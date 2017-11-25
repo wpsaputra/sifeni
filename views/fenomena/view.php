@@ -10,13 +10,13 @@ use app\models\SfSumber;
 /* @var $this yii\web\View */
 /* @var $model app\models\Fenomena */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Fenomenas', 'url' => ['index']];
+$this->title = 'Fenomena '.$model->id;
+$this->params['breadcrumbs'][] = ['label' => 'Daftar Fenomena', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="fenomena-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
 
     <p>
         <?php

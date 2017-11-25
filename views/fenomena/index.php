@@ -11,17 +11,17 @@ use app\models\SfPengaruh;
 /* @var $searchModel app\models\FenomenaSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Fenomenas';
+$this->title = 'Daftar Fenomena';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="fenomena-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
-        <?= Html::a('Create Fenomena', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+        <?= Html::a('Create Fenomena', ['create'], ['class' => 'btn btn-success pull-right']) ?>
+    </p><br/>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -69,6 +69,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
 
             'tanggal_entri',
+            [
+                'attribute' => 'isVerified',
+                'value' => function($model){
+                    return ($model->isVerified==1)?  'sudah verifikasi' : 'belum verifikasi';
+                }
+            ],
+
+
             // 'upload_foto_dokumen:ntext',
             // 'isVerified',
 

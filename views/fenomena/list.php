@@ -4,7 +4,7 @@ use yii\data\ActiveDataProvider;
 use app\models\Fenomena;
 
 $dataProvider = new ActiveDataProvider([
-    'query' => Fenomena::find(),
+    'query' => Fenomena::find()->where(['isVerified'=>1]),
     'pagination' => [
         'pageSize' => 4,
     ],
@@ -13,6 +13,11 @@ $dataProvider = new ActiveDataProvider([
 
 <div class="post">
     <div class="row">
+        <div class="alert alert-warning alert-dismissable">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Warning!</strong> Fenomena yang ditampilkan hanya fenomena yang sudah diapprove admin.
+        </div>
+
         <?php
         echo ListView::widget([
             'dataProvider' => $dataProvider,
