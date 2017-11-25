@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\HttpException;
 
 /**
  * FenomenaController implements the CRUD actions for Fenomena model.
@@ -96,6 +97,9 @@ class FenomenaController extends Controller
      */
     public function actionUpdate($id)
     {
+        if(Yii::$app->user->identity->level!=1){
+            throw new HttpException(403, "You are not allowed to perform this action");
+        }
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -115,6 +119,9 @@ class FenomenaController extends Controller
      */
     public function actionDelete($id)
     {
+        if(Yii::$app->user->identity->level!=1){
+            throw new HttpException(403, "You are not allowed to perform this action");
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);

@@ -72,7 +72,16 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'upload_foto_dokumen:ntext',
             // 'isVerified',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'visibleButtons'=>[
+                    'update' => Yii::$app->user->identity->level==1,
+                    'delete' => Yii::$app->user->identity->level==1,
+                ]
+            ],
         ],
+        
+
+
     ]); ?>
 </div>
