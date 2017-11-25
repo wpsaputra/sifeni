@@ -11,7 +11,8 @@ $this->title = 'SiFENI';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-login">
-    <h2 style="margin-bottom: 15px"><?= Html::encode($this->title) ?></h2>
+    <h2 style="margin-bottom: 0px" class="text-center"><?= Html::encode($this->title) ?></h2>
+    <hr/>
 
     <!-- <p>Please fill out the following fields to login:</p> -->
 

@@ -27,8 +27,9 @@ $this->registerCssFile('@web/css/custom_login.css' , ['position' => View::POS_EN
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<!-- <body> -->
-<body class="color-grey">
+<body>
+<!-- <body class="color-grey"> -->
+<!-- <body class="imx"> -->
 <?php $this->beginBody() ?>
 
 <div class="wrap">
