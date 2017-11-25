@@ -6,8 +6,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Fenomena */
 
-$this->title = 'Create Fenomena';
-$this->params['breadcrumbs'][] = ['label' => 'Fenomenas', 'url' => ['index']];
+$this->title = 'Tambah Fenomena';
+$this->params['breadcrumbs'][] = ['label' => 'Daftar Fenomena', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="fenomena-create">

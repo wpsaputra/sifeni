@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'level')->dropDownList(['1' => 'Admin', '2' => 'User']) ?>
+    <?= $form->field($model, 'level')->dropDownList(['1' => 'Admin', '2' => 'User'], ['prompt'=>'Pilih Level User'] ) ?>
     <!-- <?= $form->field($model, 'level')->textInput() ?> -->
 
     <div class="form-group">

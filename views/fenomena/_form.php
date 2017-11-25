@@ -76,17 +76,17 @@ $this->registerCssFile('@web/css/dropzone.css' , ['position' => View::POS_HEAD])
     <div class="form-group field-fenomena-upload_foto_dokumen required">
         <label class="control-label" for="fenomena-upload_foto_dokumen">Upload Foto / Dokumen</label>
         <div class="dropzone form-group" id="dropzone">
-            <div class="dz-default dz-message"><span>Drop files or click here to upload</span></div>
+            <div class="dz-default dz-message"><span>Drop files or click here to upload (jpg, png, pdf)</span></div>
         </div>
         <div class="help-block"></div>
     </div>
     
 
     <!-- <?= $form->field($model, 'isVerified')->textInput() ?> -->
-    <?= $form->field($model, 'isVerified')->dropDownList(
+    <?= (Yii::$app->user->identity->level==1)? $form->field($model, 'isVerified')->dropDownList(
         [0=>'Belum Diverifikasi', 1=>'Sudah Diverifikasi'],
-        ['prompt'=>'Pilih Status Fenomena']
-    )?>
+        ['prompt'=>'Pilih Status Fenomena'] 
+    ) : ''?>
 
 
     <div class="form-group">

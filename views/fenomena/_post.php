@@ -14,6 +14,10 @@ for($i=0; $i<count($array_image_dokumen); $i++){
 
 }
 
+if(count($array_image)==0){
+    array_push($array_image, 'no_photo_available.jpg');
+}
+
 
 ?>
     <!-- <h2><?= Html::encode($model->id) ?></h2>

@@ -89,7 +89,7 @@ class Fenomena extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tanggal_fenomena', 'tanggal_entri', 'sumber_id', 'kecamatan_id', 'isi_fenomena', 'lapangan_usaha', 'pengaruh_id', 'upload_foto_dokumen', 'isVerified'], 'required'],
+            [['tanggal_fenomena', 'sumber_id', 'kecamatan_id', 'isi_fenomena', 'lapangan_usaha', 'pengaruh_id', 'upload_foto_dokumen', 'tanggal_entri'], 'required'],
             [['tanggal_fenomena', 'tanggal_entri'], 'safe'],
             [['sumber_id', 'kecamatan_id', 'lapangan_usaha', 'pengaruh_id', 'isVerified'], 'integer'],
             [['isi_fenomena', 'upload_foto_dokumen'], 'string'],
