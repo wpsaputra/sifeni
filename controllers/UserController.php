@@ -8,6 +8,8 @@ use app\models\UserSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\filters\AccessControl;
+use yii\web\HttpException;
 
 /**
  * UserController implements the CRUD actions for User model.
@@ -20,6 +22,19 @@ class UserController extends Controller
     public function behaviors()
     {
         return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index', 'view', 'create', 'update', 'delete'],
+                'rules' => [
+                    [
+                        // 'actions' => ['logout'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
+                ],
+            ], 
+
+
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
@@ -35,6 +50,9 @@ class UserController extends Controller
      */
     public function actionIndex()
     {
+        if(Yii::$app->user->identity->level!=1){
+            throw new HttpException(403, "You are not allowed to perform this action");
+        }
         $searchModel = new UserSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
@@ -51,6 +69,9 @@ class UserController extends Controller
      */
     public function actionView($id)
     {
+        if(Yii::$app->user->identity->level!=1){
+            throw new HttpException(403, "You are not allowed to perform this action");
+        }
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -63,6 +84,9 @@ class UserController extends Controller
      */
     public function actionCreate()
     {
+        if(Yii::$app->user->identity->level!=1){
+            throw new HttpException(403, "You are not allowed to perform this action");
+        }
         $model = new User();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -82,6 +106,9 @@ class UserController extends Controller
      */
     public function actionUpdate($id)
     {
+        if(Yii::$app->user->identity->level!=1){
+            throw new HttpException(403, "You are not allowed to perform this action");
+        }
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
@@ -101,6 +128,9 @@ class UserController extends Controller
      */
     public function actionDelete($id)
     {
+        if(Yii::$app->user->identity->level!=1){
+            throw new HttpException(403, "You are not allowed to perform this action");
+        }
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -115,6 +145,9 @@ class UserController extends Controller
      */
     protected function findModel($id)
     {
+        if(Yii::$app->user->identity->level!=1){
+            throw new HttpException(403, "You are not allowed to perform this action");
+        }
         if (($model = User::findOne($id)) !== null) {
             return $model;
         } else {

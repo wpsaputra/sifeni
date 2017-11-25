@@ -37,7 +37,7 @@ Yii::$app->view->title = 'SiFeni';
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    if(Yii::$app->user->identity->level==1){
+    if(true){
         echo Nav::widget([
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
@@ -86,16 +86,17 @@ Yii::$app->view->title = 'SiFeni';
             ],
         ]);
     }
+    
     NavBar::end();
     ?>
 
-    <!-- <div class="container"> -->
+    <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
         <?= $content ?>
-    <!-- </div> -->
+    </div>
 </div>
 
 <footer class="footer">

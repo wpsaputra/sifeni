@@ -37,29 +37,56 @@ Yii::$app->view->title = 'SiFeni';
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
     ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'Data Pengguna', 'url' => ['/user']],
-            ['label' => 'Lihat Fenomena', 'url' => ['/fenomena']],
-            ['label' => 'Entri Fenomena', 'url' => ['/fenomena/create']],
-            // ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Foto dan Dokumen', 'url' => ['/fenomena/list']],
-            Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
-            ) : (
-                '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
+    if(Yii::$app->user->identity->level==1){
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => [
+                ['label' => 'Home', 'url' => ['/site/index']],
+                ['label' => 'Data Pengguna', 'url' => ['/user']],
+                ['label' => 'Lihat Fenomena', 'url' => ['/fenomena']],
+                ['label' => 'Entri Fenomena', 'url' => ['/fenomena/create']],
+                // ['label' => 'About', 'url' => ['/site/about']],
+                ['label' => 'Foto dan Dokumen', 'url' => ['/fenomena/list']],
+                Yii::$app->user->isGuest ? (
+                    ['label' => 'Login', 'url' => ['/site/login']]
+                ) : (
+                    '<li>'
+                    . Html::beginForm(['/site/logout'], 'post')
+                    . Html::submitButton(
+                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        ['class' => 'btn btn-link logout']
+                    )
+                    . Html::endForm()
+                    . '</li>'
                 )
-                . Html::endForm()
-                . '</li>'
-            )
-        ],
-    ]);
+            ],
+        ]);
+
+    }else{
+        echo Nav::widget([
+            'options' => ['class' => 'navbar-nav navbar-right'],
+            'items' => [
+                ['label' => 'Home', 'url' => ['/site/index']],
+                ['label' => 'Lihat Fenomena', 'url' => ['/fenomena']],
+                ['label' => 'Entri Fenomena', 'url' => ['/fenomena/create']],
+                // ['label' => 'About', 'url' => ['/site/about']],
+                ['label' => 'Foto dan Dokumen', 'url' => ['/fenomena/list']],
+                Yii::$app->user->isGuest ? (
+                    ['label' => 'Login', 'url' => ['/site/login']]
+                ) : (
+                    '<li>'
+                    . Html::beginForm(['/site/logout'], 'post')
+                    . Html::submitButton(
+                        'Logout (' . Yii::$app->user->identity->username . ')',
+                        ['class' => 'btn btn-link logout']
+                    )
+                    . Html::endForm()
+                    . '</li>'
+                )
+            ],
+        ]);
+    }
+    
     NavBar::end();
     ?>
 
