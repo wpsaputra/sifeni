@@ -9,10 +9,12 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\web\View;
 
 AppAsset::register($this);
 Yii::$app->view->title = 'SiFeni'; 
 // Yii::$app->view->title = Yii::$app->user->identity->level; 
+$this->registerCssFile('@web/css/custom_login.css' , ['position' => View::POS_END]);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -25,87 +27,28 @@ Yii::$app->view->title = 'SiFeni';
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body>
+<!-- <body> -->
+<body class="color-grey">
 <?php $this->beginBody() ?>
 
 <div class="wrap">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    if(true){
-        echo Nav::widget([
-            'options' => ['class' => 'navbar-nav navbar-right'],
-            'items' => [
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'Data Pengguna', 'url' => ['/user']],
-                ['label' => 'Lihat Fenomena', 'url' => ['/fenomena']],
-                ['label' => 'Entri Fenomena', 'url' => ['/fenomena/create']],
-                // ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Foto dan Dokumen', 'url' => ['/fenomena/list']],
-                Yii::$app->user->isGuest ? (
-                    ['label' => 'Login', 'url' => ['/site/login']]
-                ) : (
-                    '<li>'
-                    . Html::beginForm(['/site/logout'], 'post')
-                    . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'btn btn-link logout']
-                    )
-                    . Html::endForm()
-                    . '</li>'
-                )
-            ],
-        ]);
+        <div class="outer-container">
+            <div class="inner-container">
+                <div class="centered-content" style="width: 350px">
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <?php echo $content; ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    }else{
-        echo Nav::widget([
-            'options' => ['class' => 'navbar-nav navbar-right'],
-            'items' => [
-                ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'Lihat Fenomena', 'url' => ['/fenomena']],
-                ['label' => 'Entri Fenomena', 'url' => ['/fenomena/create']],
-                // ['label' => 'About', 'url' => ['/site/about']],
-                ['label' => 'Foto dan Dokumen', 'url' => ['/fenomena/list']],
-                Yii::$app->user->isGuest ? (
-                    ['label' => 'Login', 'url' => ['/site/login']]
-                ) : (
-                    '<li>'
-                    . Html::beginForm(['/site/logout'], 'post')
-                    . Html::submitButton(
-                        'Logout (' . Yii::$app->user->identity->username . ')',
-                        ['class' => 'btn btn-link logout']
-                    )
-                    . Html::endForm()
-                    . '</li>'
-                )
-            ],
-        ]);
-    }
-    
-    NavBar::end();
-    ?>
 
-    <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
-    </div>
+
+
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; BPS Kabupaten Konawe <?= date('Y') ?></p>
-
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
 
 <?php $this->endBody() ?>
 </body>
