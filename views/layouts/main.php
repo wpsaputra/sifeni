@@ -43,7 +43,7 @@ Yii::$app->view->title = 'SiFeni';
             'items' => [
                 ['label' => 'Home', 'url' => ['/site/index']],
                 ['label' => 'Data Pengguna', 'url' => ['/user']],
-                ['label' => 'Lihat Fenomena', 'url' => ['/fenomena']],
+                ['label' => 'Lihat Fenomena', 'url' => ['/fenomena', 'per-page' => 5]],
                 ['label' => 'Entri Fenomena', 'url' => ['/fenomena/create']],
                 // ['label' => 'About', 'url' => ['/site/about']],
                 ['label' => 'Foto dan Dokumen', 'url' => ['/fenomena/list']],
@@ -67,7 +67,7 @@ Yii::$app->view->title = 'SiFeni';
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
                 ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'Lihat Fenomena', 'url' => ['/fenomena']],
+                ['label' => 'Lihat Fenomena', 'url' => ['/fenomena', 'per-page' => 5]],
                 ['label' => 'Entri Fenomena', 'url' => ['/fenomena/create']],
                 // ['label' => 'About', 'url' => ['/site/about']],
                 ['label' => 'Foto dan Dokumen', 'url' => ['/fenomena/list']],
