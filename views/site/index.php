@@ -18,15 +18,15 @@ $this->title = 'My Yii Application';
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-        <img src="http://localhost/sifeni/web/uploads/1.jpg" alt="Los Angeles">
+        <img src="<?php echo Url::to('@web/uploads/'.'1.jpg')?>" alt="Los Angeles">
         </div>
 
         <div class="item">
-        <img src="http://localhost/sifeni/web/uploads/2.jpg" alt="Chicago">
+        <img src="<?php echo Url::to('@web/uploads/'.'2.jpg')?>" alt="Chicago">
         </div>
 
         <div class="item">
-        <img src="http://localhost/sifeni/web/uploads/3.jpg" alt="New York">
+        <img src="<?php echo Url::to('@web/uploads/'.'3.jpg')?>" alt="New York">
         </div>
     </div>
 
