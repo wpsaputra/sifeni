@@ -12,12 +12,12 @@ $dataProvider = new ActiveDataProvider([
 ?>
 
 <div class="post">
-    <div class="row">
-        <div class="alert alert-warning alert-dismissable">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <strong>Warning!</strong> Fenomena yang ditampilkan hanya fenomena yang sudah diapprove admin.
-        </div>
+    <div class="alert alert-warning alert-dismissable">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Warning!</strong> Fenomena yang ditampilkan hanya fenomena yang sudah diapprove admin.
+    </div>
 
+    <div class="row">
         <?php
         echo ListView::widget([
             'dataProvider' => $dataProvider,

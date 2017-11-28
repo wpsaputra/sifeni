@@ -41,8 +41,8 @@ var tableToExcel = (function() {
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <form name="pageselect">
-        <div class="row">
-            <div class="col-xs-3">
+        <div class="row" style="margin-bottom: 5px;">
+            <div class="col-sm-3">
                 <select name="menu" class="form-control" onChange="window.document.location.href=this.options[this.selectedIndex].value;" value="GO">
                     <option <?php echo ($perpage==5)? 'selected' : 'value'; ?>="<?php echo Url::to(['fenomena/index', 'per-page' => 5]);?>">Tampilkan 5 Baris</option>
                     <option <?php echo ($perpage==10)? 'selected' : 'value'; ?>="<?php echo Url::to(['fenomena/index', 'per-page' => 10]);?>">Tampilkan 10 Baris</option>

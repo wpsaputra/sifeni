@@ -10,6 +10,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\web\View;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 Yii::$app->view->title = 'SiFeni'; 
@@ -25,6 +26,7 @@ $this->registerCssFile('@web/css/custom_login.css' , ['position' => View::POS_EN
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
+    <link rel="shortcut icon" type="image/png" href="<?php echo Url::to('@web/css/favicon.ico');?>"/>
     <?php $this->head() ?>
 </head>
 <body>
