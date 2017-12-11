@@ -13,7 +13,8 @@ use yii\helpers\Url;
 
 AppAsset::register($this);
 Yii::$app->view->title = 'SiFeni'; 
-// Yii::$app->view->title = Yii::$app->user->identity->level; 
+// Yii::$app->view->title = Yii::$app->user->identity->level;
+$isFenomena = (Yii::$app->request->url == '/sifeni/web/fenomena?per-page=5')OR(Yii::$app->request->url == '/sifeni/web/fenomena?per-page=10')OR(Yii::$app->request->url == '/sifeni/web/fenomena'); 
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
@@ -45,8 +46,8 @@ Yii::$app->view->title = 'SiFeni';
             'options' => ['class' => 'navbar-nav navbar-right'],
             'items' => [
                 ['label' => 'Home', 'url' => ['/site/index']],
-                ['label' => 'Data Pengguna', 'url' => ['/user']],
-                ['label' => 'Lihat Fenomena', 'url' => ['/fenomena', 'per-page' => 5]],
+                ['label' => 'Data Pengguna', 'url' => ['/user'], 'active' => Yii::$app->controller->id == 'user'],
+                ['label' => 'Lihat Fenomena', 'url' => ['/fenomena', 'per-page' => 5], 'active' => $isFenomena], 
                 ['label' => 'Entri Fenomena', 'url' => ['/fenomena/create']],
                 // ['label' => 'About', 'url' => ['/site/about']],
                 ['label' => 'Foto dan Dokumen', 'url' => ['/fenomena/list']],
