@@ -7,6 +7,7 @@ use app\models\SfKecamatan;
 use app\models\SfLapanganUsaha;
 use app\models\SfPengaruh;
 use yii\helpers\Url;
+use yii\web\View;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\FenomenaSearch */
@@ -17,23 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
 $request = Yii::$app->request;
 $perpage = $request->get('per-page', 0);
+
+$this->registerAssetBundle(yii\web\JqueryAsset::className(), View::POS_HEAD);
+$this->registerJsFile('@web/js/jquery.table2excel.min.js' , ['position' => View::POS_BEGIN]);
 ?>
-
-<script type="text/javascript">
-var tableToExcel = (function() {
-  var uri = 'data:application/vnd.ms-excel;base64,'
-    , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>'
-    , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
-    , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
-  return function(table, name) {
-    if (!table.nodeType) table = document.getElementsByClassName(table)[0]
-    var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
-    window.location.href = uri + base64(format(template, ctx))
-  }
-})()
-</script>
-
-
 
 <div class="fenomena-index">
 
@@ -53,7 +41,8 @@ var tableToExcel = (function() {
     </form>
     <p>
         <?= Html::a('Tambah Fenomena', ['create'], ['class' => 'btn btn-success pull-right', 'style'=>'margin-left:5px;']) ?>
-        <input type="button" onclick="tableToExcel('table', 'W3C Example Table')" value="Download Excel" class="btn btn-primary pull-right">
+        <!-- <input type="button" onclick="tableToExcel('table', 'W3C Example Table')" value="Download Excel" class="btn btn-primary pull-right"> -->
+        <input type="button" id="button" value="Download Excel" class="btn btn-primary pull-right">
     </p><br/>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -126,3 +115,14 @@ var tableToExcel = (function() {
 
     ]); ?>
 </div>
+
+<script type="text/javascript">
+    $("#button").click(function(){
+        $(".table").table2excel({
+            // exclude CSS class
+            exclude: ".filters",
+            name: "sheet 1",
+            filename: "Export Fenomena" //do not include extension
+        }); 
+    });
+</script>
