@@ -110,7 +110,7 @@ $this->registerCssFile('@web/css/dropzone.css' , ['position' => View::POS_HEAD])
     $("div#dropzone").dropzone({ 
         url: "<?php echo Url::to(['site/upload']);?>", 
         paramName: "UploadForm[imageFile]", // The name that will be used to transfer the file
-        maxFilesize: 1, // MB
+        maxFilesize: 100, // MB
         addRemoveLinks: true,
         acceptedFiles: "image/jpeg,image/png,application/pdf",
 
@@ -198,9 +198,10 @@ $this->registerCssFile('@web/css/dropzone.css' , ['position' => View::POS_HEAD])
                 if (rmvFile){
                     $.ajax({
                         // url: "http://localhost/dropzone/sample/delete_temp_files.php",
-                        url: "<?php echo Url::to(['site/delete']);?>",
-                        type: "POST",
-                        data: { "fileList" : rmvFile }
+                        // disable delete
+                        // url: "<?php //echo Url::to(['site/delete']);?>",
+                        // type: "POST",
+                        // data: { "fileList" : rmvFile }
                     });
                 }
                 console.log(fileList);
