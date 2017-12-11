@@ -108,7 +108,7 @@ if(count($array_image)==0){
                         <br/> <?php echo $model->isi_fenomena; ?>
                     </p>
 
-                    <div class="dropdown pull-right">
+                    <div class="dropdown pull-right <?=($array_image_dokumen[0]=="" && count($array_image_dokumen)==1) ? 'hidden' : ''?>">
                         <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">Download
                         <span class="caret"></span></button>
                         <ul class="dropdown-menu">

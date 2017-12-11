@@ -136,7 +136,11 @@ $this->registerCssFile('@web/css/dropzone.css' , ['position' => View::POS_HEAD])
             // this.createThumbnailFromUrl(mockFile, 'http://localhost:1000/sifeni/web/uploads/1511784770image_1.jpg');
 
             var fileserver = $("#fenomena-upload_foto_dokumen").text();
-            fileserver = fileserver.split(",");
+            if(fileserver==""){
+                fileserver = new Array;
+            }else{
+                fileserver = fileserver.split(",");
+            }
 
             for(f=0;f<fileserver.length;f++){
                 let mockFile = {
