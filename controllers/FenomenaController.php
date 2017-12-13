@@ -53,6 +53,9 @@ class FenomenaController extends Controller
         $searchModel = new FenomenaSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         // $dataProvider->pagination->pageSize=5;
+        if(Yii::$app->user->identity->level!=1){
+            $dataProvider->query->where('isVerified = 1');
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,

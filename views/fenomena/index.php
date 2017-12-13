@@ -93,8 +93,9 @@ $this->registerJsFile('@web/js/jquery.table2excel.min.js' , ['position' => View:
             'tanggal_entri',
             [
                 'attribute' => 'isVerified',
+                'format' => 'raw',
                 'value' => function($model){
-                    return ($model->isVerified==1)?  'sudah verifikasi' : 'belum verifikasi';
+                    return ($model->isVerified==1)?  '<b style="color: #449d44;">sudah verifikasi</b>' : '<b style="color: #d9534f;">belum verifikasi</b>';
                 }
             ],
 
